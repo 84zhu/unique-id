@@ -1,6 +1,7 @@
 package com.gallen.uidgenerator.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
  * @author Gallen - 2020/4/1
  */
 @Configuration
+@Slf4j
 public class DataSourceConfig {
 
     @Value("${jdbc.url}")
@@ -68,8 +70,7 @@ public class DataSourceConfig {
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {
-            //logger.error("druid configuration initialization filter", e);
-            // TODO log here
+            log.error("druid configuration initialization filter：{}", e);
         }
 
         return datasource;
